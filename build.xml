@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="UXToolWeb" default="dist" basedir="." >
+	<property name="src" value="src"/>
+	<property name="build" value="build"/>
+	<property name="dist"  location="dist"/>
+    <property name="web" value="WebRoot"/>
+    <property name="reflib" value="WebRoot/WEB-INF/lib"/>
+	
+	<path id="ref">   
+		<fileset dir="${reflib}">   
+			<include name="*.jar"/>   
+		</fileset>
+		<!--pathelement location="${build}/classes" /-->
+     </path>
+	
+	<target name="init" depends="clean">                                    
+	    <!-- Create the time stamp -->                                    
+	    <tstamp/>                               
+	    <mkdir dir="${build}/WEB-INF/classes"/>
+	</target> 
+	<target name="compile" depends="init" description="compile the source" >
+		<javac srcdir="${src}" destdir="${build}/WEB-INF/classes">
+			<compilerarg line="-encoding UTF-8 -verbose" />
+			<classpath refid="ref" />
+		</javac>
+	</target>
+	<target name="dist" depends="compile" description="generate the distribution" >                                    
+	    <!-- Create the distribution directory -->                                    
+	    <mkdir dir="${dist}"/>
+	    <!--像jsp,jar这些直接用不用编译的文件，直接用copy命令。-->
+        <copy file="${web}/index.jsp" tofile="${build}/index.jsp" />
+		<copy file="${web}/iconPage.html" tofile="${build}/iconPage.html" />
+        <copy file="${web}/WEB-INF/web.xml" tofile="${build}/WEB-INF/web.xml" />
+        <copy file="${src}/struts.xml" tofile="${build}/WEB-INF/classes/struts.xml" />
+        <copy todir="${build}/WEB-INF/lib">
+            <fileset dir="${web}/WEB-INF/lib"/>
+        </copy>
+        <copy todir="${build}/JQuery">
+            <fileset dir="${web}/JQuery"/>
+        </copy>
+        <copy todir="${build}/js">
+            <fileset dir="${web}/js"/>
+        </copy>
+        
+	    <!--最后用jar命令打成jar/war文件，文件名和后缀随便起。basedir为欲打包的原文件路经>
+	    <jar jarfile="${dist}/UXToolWeb.jar" basedir="${build}"/-->
+		<war destfile="${dist}/UXToolWeb.war" basedir="${build}" webxml="${basedir}/WebRoot/WEB-INF/web.xml" />
+	</target>
+	
+	<target name="clean" description="clean up" >                                    
+	    <!--设定删除命令要删的路径。-->                                 
+	    <delete dir="${build}"/>
+	    <delete dir="${dist}"/>
+	</target>  
+</project>

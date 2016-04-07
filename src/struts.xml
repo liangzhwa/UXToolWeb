@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+		<package name="xiaoxi" extends="struts-default">				
+			<!-- 字典表 
+			<action name="test" class="com.bixi.wordbook.TestUXTool" >
+				<result name="success">/index.jsp</result>
+			</action>
+			-->	
+			<action name="SelectPicUrl" class="com.bixi.wordbook.SelectPicUrl" >
+				<result name="success">/index.jsp</result>
+			</action>
+			<action name="GetTimeStamp" class="com.bixi.wordbook.GetTimeStamp" >
+				<result name="success">/index.jsp</result>
+			</action>
+			<action name="GetPictureByFrame" class="com.bixi.wordbook.GetPictureByFrame" >
+				<result name="success">/index.jsp</result>
+			</action>
+			<action name="GetFPS" class="com.bixi.wordbook.GetFPS" >
+				<result name="success">/index.jsp</result>
+			</action>
+			<action name="GetPictrues" class="com.bixi.wordbook.GetPictrues" >
+				<result name="success">/index.jsp</result>
+			</action>
+			<action name="DeleteTempPictrues" class="com.bixi.wordbook.DeleteTempPictrues" >
+				<result name="success">/index.jsp</result>
+			</action>
+		</package>
+</struts>
